@@ -16,3 +16,8 @@ variable "environment" {
   description = "Environment to deploing"
   default     = "Development"
 }
+variable "domain_name_prefix" {
+  type        = string
+  description = "Environment to deploing"
+  default     = "matetask"
+}

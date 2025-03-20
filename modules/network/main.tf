@@ -12,16 +12,9 @@ resource "azurerm_subnet" "default" {
   address_prefixes     = ["10.0.0.0/24"]
 }
 
-resource "azurerm_network_interface" "main" {
-  name                = "${var.prefix}-nic"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-
-  ip_configuration {
-    name                          = "testconfiguration1"
-    subnet_id                     = azurerm_subnet.default.id
-    private_ip_address_allocation = "Dynamic"
-  }
+resource "random_integer" "rand" {
+  min = 1000
+  max = 9999
 }
 
 resource "azurerm_public_ip" "linuxboxpip" {
@@ -29,6 +22,8 @@ resource "azurerm_public_ip" "linuxboxpip" {
   resource_group_name = var.resource_group_name
   location            = var.location
   allocation_method   = "Dynamic"
+
+  domain_name_label = "${var.domain_name_prefix}-${random_integer.rand.result}"
 
   tags = {
     environment = var.environment
