@@ -11,7 +11,7 @@ resource "azurerm_network_interface" "main" {
 }
 
 resource "azurerm_virtual_machine" "matebox" {
-  name                  = "${var.vm_name}-vm"
+  name                  = var.vm_name
   location              = var.location
   resource_group_name   = var.resource_group_name
   network_interface_ids = [azurerm_network_interface.main.id]
@@ -42,8 +42,8 @@ resource "azurerm_virtual_machine" "matebox" {
   os_profile_linux_config {
     disable_password_authentication = true
     ssh_keys {
-      key_data = var.public_ssh
-      path = "/home/testadmin/.ssh/authorized_keys"
+      key_data = var.public_ssh_key
+      path     = "/home/testadmin/.ssh/authorized_keys"
     }
   }
   tags = {
@@ -52,7 +52,7 @@ resource "azurerm_virtual_machine" "matebox" {
 }
 
 resource "azurerm_virtual_machine_extension" "example" {
-  name                 = "install-app"
+  name                 = local.script_name
   virtual_machine_id   = azurerm_virtual_machine.matebox.id
   publisher            = "Microsoft.Azure.Extensions"
   type                 = "CustomScript"
@@ -60,8 +60,8 @@ resource "azurerm_virtual_machine_extension" "example" {
 
   settings = <<SETTINGS
     {
-      "fileUris": jsonencode(var.download_files_uris),
-      "commandToExecute": "bash /var/lib/waagent/custom-script/download/0/install-app.sh"
+      "fileUris": ["${var.script_url}"],
+      "commandToExecute": "${local.script_path}"
     }
   SETTINGS
 

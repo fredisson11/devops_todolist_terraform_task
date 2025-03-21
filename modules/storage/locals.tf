@@ -1,3 +1,3 @@
 locals {
-  sa_name = "${var.prefix}${random_string.suffix.result}"
+  sa_name = "${var.sa_name_prefix}${random_string.suffix.result}"
 }

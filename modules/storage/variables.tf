@@ -1,6 +1,7 @@
-variable "prefix" {
+variable "environment" {
   type        = string
-  description = "Prefix for resources names"
+  description = "Environment to deploing"
+  default     = "Development"
 }
 variable "resource_group_name" {
   type        = string
@@ -11,16 +12,10 @@ variable "location" {
   description = "The location for all resources"
   default     = "East US"
 }
-variable "environment" {
-  type        = string
-  description = "Environment to deploing"
-  default     = "Development"
-}
-
 variable "sa_name_prefix" {
   type        = string
   description = "Prefix for storage account name"
-  default     = ""
+  default     = "default"
 
   validation {
     condition     = length(var.sa_name_prefix) <= 14 && can(regex("^[a-z0-9]*$", var.sa_name_prefix))
@@ -37,7 +32,6 @@ variable "sa_replication_type" {
   description = "Storage account replication type"
   default     = "LRS"
 }
-
 variable "countainer_name" {
   type        = string
   description = ""
