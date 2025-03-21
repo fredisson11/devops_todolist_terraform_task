@@ -51,6 +51,6 @@ module "storage" {
   sa_tier             = var.storage_account_tier
   sa_replication_type = var.storage_account_replication_type
 
-  countainer_name       = var.countainer_name
+  container_name        = var.container_name
   container_access_type = var.container_access_type
 }
