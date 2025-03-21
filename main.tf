@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "backend" {
-  name     = "mate-azure-task-12"
-  location = "uksouth"
+  name     = var.resource_group_name
+  location = var.location
 }
 
 module "network" {
@@ -38,7 +38,7 @@ module "compute" {
   is_data_disks_will_deleted_on_termination = var.is_data_disks_will_deleted_on_termination
 
   public_ssh_key = local.public_ssh_key
-  script_url     = var.script_url
+  script_url     = var.install_app_script_url
 }
 
 module "storage" {

@@ -91,13 +91,13 @@ variable "admin_username" {
 variable "is_os_disks_will_deleted_on_termination" {
   type        = bool
   description = "Whether the OS disk should be automatically deleted when the VM is terminated."
-  default     = true
+  default     = false
 }
 
 variable "is_data_disks_will_deleted_on_termination" {
   type        = bool
   description = "Whether data disks should be automatically deleted when the VM is terminated."
-  default     = true
+  default     = false
 }
 
 variable "ssh_key_public" {
@@ -106,7 +106,7 @@ variable "ssh_key_public" {
   default     = "~/.ssh/id_rsa.pub"
 }
 
-variable "script_url" {
+variable "install_app_script_url" {
   type        = string
   description = "URL of the installation script to be downloaded and executed on the VM."
   default     = "https://raw.githubusercontent.com/fredisson11/devops_todolist_terraform_task/main/install-app.sh"
