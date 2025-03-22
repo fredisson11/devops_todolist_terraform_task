@@ -3,6 +3,7 @@ variable "resource_group_name" {}
 variable "location" {}
 variable "subnet_id" {}
 variable "ip_allocation" {}
+variable "public_ip_address_id" {}
 variable "vm_name" {}
 variable "vm_size" {}
 variable "os_hostname" {}

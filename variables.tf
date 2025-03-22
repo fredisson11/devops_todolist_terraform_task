@@ -52,6 +52,12 @@ variable "ip_allocation" {
   default     = "Dynamic"
 }
 
+variable "ip_sku" {
+  type        = string
+  description = "IP SKU for the public IP address (Basic or Standard)."
+  default     = "Basic"
+}
+
 variable "dns_label" {
   type        = string
   description = "DNS label for the public IP address."

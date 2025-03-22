@@ -7,6 +7,7 @@ resource "azurerm_network_interface" "main" {
     name                          = "testconfiguration1"
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = var.ip_allocation
+    public_ip_address_id = var.public_ip_address_id
   }
 }
 
@@ -52,7 +53,7 @@ resource "azurerm_virtual_machine" "matebox" {
 }
 
 resource "azurerm_virtual_machine_extension" "example" {
-  name                 = local.script_name
+  name                 = "CustomScript"
   virtual_machine_id   = azurerm_virtual_machine.matebox.id
   publisher            = "Microsoft.Azure.Extensions"
   type                 = "CustomScript"
@@ -60,8 +61,8 @@ resource "azurerm_virtual_machine_extension" "example" {
 
   settings = <<SETTINGS
     {
-      "fileUris": ["${var.script_url}"],
-      "commandToExecute": "${local.script_path}"
+      "fileUris": ["https://raw.githubusercontent.com/fredisson11/devops_todolist_terraform_task/main/install-app.sh"],
+      "commandToExecute": "sh install-app.sh"
     }
   SETTINGS
 

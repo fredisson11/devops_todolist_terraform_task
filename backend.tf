@@ -1,9 +1,12 @@
 terraform {
-  backend "azurerm" {
-    resource_group_name  = "mate-azure-task-12"
-    storage_account_name = "matestorage12"
-    container_name       = "tfstate"
-    key                  = "terraform.tfstate"
-    use_oidc             = true
+  # backend "azurerm" {
+  #   resource_group_name  = var.resource_group_name
+  #   storage_account_name = module.storage.sa_name
+  #   container_name       = "tfstate"
+  #   key                  = "terraform.tfstate"
+  #   use_oidc             = true
+  # }
+  backend "local" {
+    path = "./terraform/terraform.tfstate"
   }
 }

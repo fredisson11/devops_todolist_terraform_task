@@ -22,6 +22,7 @@ resource "azurerm_public_ip" "linuxboxpip" {
   resource_group_name = var.resource_group_name
   location            = var.location
   allocation_method   = var.ip_allocation
+  sku                 = var.ip_sku
 
   domain_name_label = "${var.domain_name_prefix}-${random_integer.rand.result}"
 

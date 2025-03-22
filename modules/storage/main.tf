@@ -21,3 +21,9 @@ resource "azurerm_storage_container" "task-artifacts" {
   storage_account_id    = azurerm_storage_account.example.id
   container_access_type = var.container_access_type
 }
+
+resource "azurerm_storage_container" "tfstate" {
+  name                  = "tfstate"
+  storage_account_id    = azurerm_storage_account.example.id
+  container_access_type = "private"
+}
