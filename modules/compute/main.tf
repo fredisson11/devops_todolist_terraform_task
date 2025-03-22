@@ -7,7 +7,7 @@ resource "azurerm_network_interface" "main" {
     name                          = "testconfiguration1"
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = var.ip_allocation
-    public_ip_address_id = var.public_ip_address_id
+    public_ip_address_id          = var.public_ip_address_id
   }
 }
 

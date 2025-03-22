@@ -22,13 +22,13 @@ module "network" {
 }
 
 module "compute" {
-  source     = "./modules/compute"
+  source              = "./modules/compute"
   environment         = var.environment
   resource_group_name = azurerm_resource_group.main.name
   location            = var.location
 
-  subnet_id     = module.network.subnet_id
-  ip_allocation = var.ip_allocation
+  subnet_id            = module.network.subnet_id
+  ip_allocation        = var.ip_allocation
   public_ip_address_id = module.network.public_ip_id
 
   vm_name        = var.vm_name
