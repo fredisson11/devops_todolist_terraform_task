@@ -1,3 +1,13 @@
+output "rg_id" {
+  description = "ID of the created resource group."
+  value       = azurerm_resource_group.main.id
+}
+
+output "rg_name" {
+  description = "ID of the created resource group."
+  value       = azurerm_resource_group.main.name
+}
+
 output "vnet_id" {
   description = "ID of the created virtual network (VNet)."
   value       = module.network.vnet_id
@@ -36,6 +46,11 @@ output "vm_extension_id" {
 output "sa_id" {
   description = "ID of the created storage account."
   value       = module.storage.sa_id
+}
+
+output "sa_name" {
+  description = "Name of the created storage account."
+  value       = module.storage.sa_name
 }
 
 output "storage_container_id" {

@@ -4,7 +4,7 @@ resource "azurerm_network_interface" "main" {
   resource_group_name = var.resource_group_name
 
   ip_configuration {
-    name                          = "testconfiguration1"
+    name                          = "${var.vm_name}-ip-cfg"
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = var.ip_allocation
     public_ip_address_id          = var.public_ip_address_id
@@ -18,10 +18,7 @@ resource "azurerm_virtual_machine" "matebox" {
   network_interface_ids = [azurerm_network_interface.main.id]
   vm_size               = var.vm_size
 
-  # Uncomment this line to delete the OS disk automatically when deleting the VM
-  delete_os_disk_on_termination = var.is_os_disks_will_deleted_on_termination
-
-  # Uncomment this line to delete the data disks automatically when deleting the VM
+  delete_os_disk_on_termination    = var.is_os_disks_will_deleted_on_termination
   delete_data_disks_on_termination = var.is_data_disks_will_deleted_on_termination
 
   storage_image_reference {
@@ -61,8 +58,8 @@ resource "azurerm_virtual_machine_extension" "example" {
 
   settings = <<SETTINGS
     {
-      "fileUris": ["https://raw.githubusercontent.com/fredisson11/devops_todolist_terraform_task/main/install-app.sh"],
-      "commandToExecute": "bash install-app.sh"
+      "fileUris": ["${var.script_url}"],
+      "commandToExecute": "bash ${local.script_name}"
     }
   SETTINGS
 
