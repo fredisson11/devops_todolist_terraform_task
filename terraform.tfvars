@@ -11,11 +11,11 @@ ip_allocation               = "Dynamic"
 dns_label                   = "matetask"
 network_security_group_name = "defaultnsg"
 
-vm_name                                   = "matebox"
-vm_size                                   = "Standard_B1s"
-os_hostname                               = "hostname"
-admin_username                            = "testadmin"
-ssh_key_public                            = "~/.ssh/id_rsa.pub"
+vm_name        = "matebox"
+vm_size        = "Standard_B1s"
+os_hostname    = "hostname"
+admin_username = "testadmin"
+ssh_key_public = "~/.ssh/id_rsa.pub"
 
 install_app_script_url = "https://raw.githubusercontent.com/fredisson11/devops_todolist_terraform_task/main/install-app.sh"
 

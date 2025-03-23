@@ -15,9 +15,9 @@ resource "azurerm_linux_virtual_machine" "matebox" {
   location              = var.location
   resource_group_name   = var.resource_group_name
   network_interface_ids = [azurerm_network_interface.main.id]
-  size               = var.vm_size
-  computer_name = var.os_hostname
-  admin_username = var.admin_username
+  size                  = var.vm_size
+  computer_name         = var.os_hostname
+  admin_username        = var.admin_username
 
 
   source_image_reference {
@@ -27,7 +27,7 @@ resource "azurerm_linux_virtual_machine" "matebox" {
     version   = "latest"
   }
   os_disk {
-    caching           = "ReadWrite"
+    caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
   admin_ssh_key {
