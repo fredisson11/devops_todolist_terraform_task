@@ -11,38 +11,29 @@ resource "azurerm_network_interface" "main" {
   }
 }
 
-resource "azurerm_virtual_machine" "matebox" {
+resource "azurerm_linux_virtual_machine" "matebox" {
   name                  = var.vm_name
   location              = var.location
   resource_group_name   = var.resource_group_name
   network_interface_ids = [azurerm_network_interface.main.id]
-  vm_size               = var.vm_size
+  size               = var.vm_size
+  computer_name = var.os_hostname
+  admin_username = var.admin_username
 
-  delete_os_disk_on_termination    = var.is_os_disks_will_deleted_on_termination
-  delete_data_disks_on_termination = var.is_data_disks_will_deleted_on_termination
 
-  storage_image_reference {
+  source_image_reference {
     publisher = "Canonical"
     offer     = "0001-com-ubuntu-server-jammy"
     sku       = "22_04-lts"
     version   = "latest"
   }
-  storage_os_disk {
-    name              = "myosdisk1"
+  os_disk {
     caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
+    storage_account_type = "Standard_LRS"
   }
-  os_profile {
-    computer_name  = var.os_hostname
-    admin_username = var.admin_username
-  }
-  os_profile_linux_config {
-    disable_password_authentication = true
-    ssh_keys {
-      key_data = var.public_ssh_key
-      path     = "/home/testadmin/.ssh/authorized_keys"
-    }
+  admin_ssh_key {
+    username   = var.admin_username
+    public_key = var.public_ssh_key
   }
   tags = {
     environment = var.environment
@@ -51,7 +42,7 @@ resource "azurerm_virtual_machine" "matebox" {
 
 resource "azurerm_virtual_machine_extension" "example" {
   name                 = "CustomScript"
-  virtual_machine_id   = azurerm_virtual_machine.matebox.id
+  virtual_machine_id   = azurerm_linux_virtual_machine.matebox.id
   publisher            = "Microsoft.Azure.Extensions"
   type                 = "CustomScript"
   type_handler_version = "2.0"
@@ -62,7 +53,6 @@ resource "azurerm_virtual_machine_extension" "example" {
       "commandToExecute": "bash ${local.script_name}"
     }
   SETTINGS
-
 
   tags = {
     environment = var.environment
