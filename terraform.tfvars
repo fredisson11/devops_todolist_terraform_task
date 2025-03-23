@@ -15,8 +15,6 @@ vm_name                                   = "matebox"
 vm_size                                   = "Standard_B1s"
 os_hostname                               = "hostname"
 admin_username                            = "testadmin"
-is_os_disks_will_deleted_on_termination   = true
-is_data_disks_will_deleted_on_termination = true
 ssh_key_public                            = "~/.ssh/id_rsa.pub"
 
 install_app_script_url = "https://raw.githubusercontent.com/fredisson11/devops_todolist_terraform_task/main/install-app.sh"

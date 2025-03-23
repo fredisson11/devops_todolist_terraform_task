@@ -3,7 +3,6 @@ variable "environment" {
   description = "Deployment environment (e.g., Development, Staging, Production)."
   default     = "Development"
 }
-
 variable "resource_group_name" {
   type        = string
   description = "Name of the Azure resource group where all resources will be deployed."
@@ -92,18 +91,6 @@ variable "admin_username" {
   type        = string
   description = "Administrator username for the virtual machine."
   default     = "testadmin"
-}
-
-variable "is_os_disks_will_deleted_on_termination" {
-  type        = bool
-  description = "Whether the OS disk should be automatically deleted when the VM is terminated."
-  default     = false
-}
-
-variable "is_data_disks_will_deleted_on_termination" {
-  type        = bool
-  description = "Whether data disks should be automatically deleted when the VM is terminated."
-  default     = false
 }
 
 variable "ssh_key_public" {

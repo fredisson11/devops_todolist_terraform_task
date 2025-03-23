@@ -4,7 +4,6 @@ resource "azurerm_virtual_network" "vnet" {
   location            = var.location
   resource_group_name = var.resource_group_name
 }
-
 resource "azurerm_subnet" "default" {
   name                 = var.subnet_name
   resource_group_name  = var.resource_group_name

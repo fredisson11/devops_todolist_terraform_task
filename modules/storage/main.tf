@@ -3,7 +3,6 @@ resource "random_string" "sa_name_suffix" {
   special = false
   upper   = false
 }
-
 resource "azurerm_storage_account" "example" {
   name                     = local.sa_name
   resource_group_name      = var.resource_group_name

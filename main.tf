@@ -2,7 +2,6 @@ resource "azurerm_resource_group" "main" {
   name     = var.resource_group_name
   location = var.location
 }
-
 module "network" {
   source              = "./modules/network"
   environment         = var.environment
@@ -35,9 +34,6 @@ module "compute" {
   vm_size        = var.vm_size
   os_hostname    = var.os_hostname
   admin_username = var.admin_username
-
-  is_os_disks_will_deleted_on_termination   = var.is_os_disks_will_deleted_on_termination
-  is_data_disks_will_deleted_on_termination = var.is_data_disks_will_deleted_on_termination
 
   public_ssh_key = local.public_ssh_key
   script_url     = var.install_app_script_url
